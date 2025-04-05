@@ -46,8 +46,11 @@
 	--radius-lg: var(--radius);
 	--radius-xl: calc(var(--radius) + 4px);
 }
-body {
-	height: 100vh;
+body,
+html {
+	min-height: 100vh;
+	margin: 0;
+	padding: 0;
 }
 :root {
 	--radius: 0.625rem;
@@ -62,12 +65,13 @@ body {
 	--secondary: oklch(0.967 0.001 286.375);
 	--secondary-foreground: oklch(0.21 0.006 285.885);
 	--muted: oklch(0.967 0.001 286.375);
-	--muted-foreground: oklch(0.552 0.016 285.938);
+	--muted-foreground: oklch(0.11 0.0321 288);
+
 	--accent: oklch(0.967 0.001 286.375);
 	--accent-foreground: oklch(0.21 0.006 285.885);
 	--destructive: oklch(0.577 0.245 27.325);
 	--border: oklch(0.92 0.004 286.32);
-	--input: oklch(0.92 0.004 286.32);
+	--input: oklch(0.11 0.0321 288);
 	--ring: oklch(0.705 0.015 286.067);
 	--chart-1: oklch(0.646 0.222 41.116);
 	--chart-2: oklch(0.6 0.118 184.704);

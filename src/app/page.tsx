@@ -1,3 +1,9 @@
+"use client";
+import Hero from "@/components/Hero";
 export default function Home() {
-	return <></>;
+	return (
+		<div className="w-full h-full">
+			<Hero />
+		</div>
+	);
 }

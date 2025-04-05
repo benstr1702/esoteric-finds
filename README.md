@@ -1,6 +1,7 @@
-# Esoteric Finds
+# Esoteric Finds 🛰️💰
 
 **Check your shop – Random daily deals!**
+(food only)
 
 ## To-Do List
 
@@ -9,7 +10,8 @@
 -   [ ] **Home Page** (Like pirated movie sites – a landing page with a button to enter the shop)
 -   [ ] **Products Page** (Regular products with no time limit or price changes)
 -   [ ] **Daily Deals** (Banner, countdown, discounts, animations)
--   [ ] **Navbar** (Cart, Account, Logo, Search – no functionality until backend is ready)
+-   [☑️ ] **Carousel** (library , delay)
+-   [☑️ ] **Navbar** (Cart, Account, Logo, Search – no functionality until backend is ready)
 -   [ ] **Footer** (Low priority)
 
 ### Backend
