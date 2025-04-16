@@ -2,8 +2,9 @@
 import { Input } from "./ui/input";
 import { useRouter } from "next/navigation";
 import { ShoppingCart, User, Search } from "lucide-react";
-
+import Image from "next/image";
 import { Montserrat } from "next/font/google";
+import { useSession } from "@/lib/hooks/useSession";
 
 const montserrat = Montserrat({
 	subsets: ["latin"],
@@ -13,50 +14,87 @@ const montserrat = Montserrat({
 
 export default function Navbar() {
 	const router = useRouter();
+	const { user, status } = useSession();
+
 	return (
 		<header
-			className={`${montserrat.variable} font-bold p-6 bg-gradient-to-b bg-blue-900 sticky top-0 z-50`}
+			className={`${montserrat.variable} font-bold px-4 py-3 bg-blue-900 sticky top-0 z-50`}
 		>
-			<ul className="flex w-full justify-between items-center">
-				{/* Logo Section */}
-				<li className="flex gap-4 items-center text-white p-2 w-auto">
+			<nav className="flex items-center justify-between w-full mx-auto px-4">
+				{/* Left Section - Logo and Home */}
+				<div className="flex items-center gap-4 text-white">
 					<button
-						className="hover:cursor-pointer"
-						type="button"
-						onClick={() => {
-							router.push("/");
-						}}
+						className="flex items-center gap-2 hover:opacity-80"
+						onClick={() => router.push("/")}
 					>
-						Logo
+						<Image
+							src="/icon.png"
+							alt="Logo"
+							width={30}
+							height={30}
+							className="inline-block"
+						/>
+						<span className="text-white text-base leading-none">
+							EF
+						</span>
 					</button>
 					<button
-						className="hover:cursor-pointer"
-						type="button"
+						className="hover:opacity-80 hidden sm:block"
 						onClick={() => router.push("/")}
 					>
 						Home
 					</button>
-				</li>
-				<li className="flex gap-0 items-center sm:w-2/3 md:w-1/2 lg:w-1/3 xl:w-1/4">
-					<Input
-						type="text"
-						placeholder="Search..."
-						className="w-full border border-black rounded-l-full px-4 py-2"
-					/>
-					<button className="text-black w-14 pr-1 hover:cursor-pointer hover:opacity-70 h-9 bg-white border border-black border-l-0 rounded-r-full flex items-center justify-center">
-						<Search className="w-5 h-5" />
+				</div>
+
+				{/* Center Search Section */}
+				<div className="flex items-center justify-center max-w-md w-full mx-auto px-4 flex-1">
+					{/* Input hidden under 450px */}
+					<div className="flex w-full">
+						<div className="w-full max-[450px]:hidden">
+							<Input
+								type="text"
+								placeholder="Search..."
+								className="w-full border border-black rounded-l-full px-4 py-2"
+							/>
+						</div>
+						<button className="text-black w-12 h-9 bg-white border border-black border-l-0 rounded-r-full flex items-center justify-center hover:opacity-80 max-[450px]:w-9 max-[450px]:h-9 max-[450px]:rounded-full max-[450px]:border-none">
+							<Search className="w-5 h-5" />
+						</button>
+					</div>
+				</div>
+
+				{/* Right Section - Account and Cart */}
+				<div className="flex items-center gap-4 text-white">
+					{/* Account Button */}
+					<button
+						className="flex items-center gap-2 px-3 py-2 rounded-full transition-colors hover:bg-white/10"
+						onClick={() =>
+							user
+								? router.push("/profile")
+								: router.push("/login")
+						}
+					>
+						<User className="w-5 h-5" />
+						{status === "loading" ? (
+							<span className="text-xs">Loading...</span>
+						) : user ? (
+							<div className="text-xs flex flex-col items-start leading-tight">
+								<span>Hello,</span>
+								<span>{user.name}</span>
+							</div>
+						) : (
+							<span className="text-xs">Sign in</span>
+						)}
 					</button>
-				</li>
-				{/* Cart & Account Section */}
-				<li className="flex gap-4 text-white items-center w-auto p-2">
-					<button className="hover:cursor-pointer">
-						<ShoppingCart />
+					{/* Cart Button */}
+					<button
+						className="rounded-full w-10 h-10 flex items-center justify-center transition-colors hover:bg-white/10"
+						onClick={() => router.push("/cart")}
+					>
+						<ShoppingCart className="w-5 h-5" />
 					</button>
-					<button className="hover:cursor-pointer">
-						<User />
-					</button>
-				</li>
-			</ul>
+				</div>
+			</nav>
 		</header>
 	);
 }
