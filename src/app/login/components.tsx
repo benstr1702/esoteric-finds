@@ -1,16 +1,19 @@
 "use client";
 import { logoutAction } from "../actions";
-import { useFormState } from "react-dom";
-
-const initialState = {
-	message: "",
-};
 
 export function LogoutButton() {
-	const [, action] = useFormState(logoutAction, initialState);
+	async function handleClick() {
+		const result = await logoutAction();
+		console.log(result);
+	}
+
 	return (
-		<form action={action}>
-			<button>Sign out</button>
-		</form>
+		<button
+			className="hover:cursor-pointer"
+			type="submit"
+			onClick={handleClick}
+		>
+			LogOut
+		</button>
 	);
 }

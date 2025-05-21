@@ -23,7 +23,7 @@ export const userTable = pgTable(
 
 // Session Table
 export const sessionTable = pgTable("session", {
-	id: text("id").primaryKey(),
+	id: text("id").primaryKey().notNull(),
 	userId: integer("user_id")
 		.notNull()
 		.references(() => userTable.id, { onDelete: "cascade" }),
@@ -33,6 +33,17 @@ export const sessionTable = pgTable("session", {
 	}).notNull(),
 });
 
+// Product Categories Table
+export const productCategoryTable = pgTable(
+	"product_category",
+	{
+		id: serial("id").primaryKey(),
+		name: text("name").unique().notNull(),
+		slug: text("slug").unique().notNull(),
+		image: text("image").unique().notNull(),
+	},
+	(table) => [index("slug_index").on(table.slug)]
+);
 // Type Definitions
 export type User = InferSelectModel<typeof userTable>;
 export type Session = InferSelectModel<typeof sessionTable>;

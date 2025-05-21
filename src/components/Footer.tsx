@@ -30,13 +30,6 @@ export default function Footer() {
 				{/* Optional: Social icons (can plug in real icons later) */}
 				<div className="flex gap-3 text-gray-400">
 					<a
-						href="https://twitter.com"
-						target="_blank"
-						className="hover:text-white"
-					>
-						Twitter
-					</a>
-					<a
 						href="https://github.com/benstr1702"
 						target="_blank"
 						className="hover:text-white"

@@ -12,7 +12,7 @@
 -   [ ] **Daily Deals** (Banner, countdown, discounts, animations)
 -   [☑️ ] **Carousel** (library , delay)
 -   [☑️ ] **Navbar** (Cart, Account, Logo, Search – no functionality until backend is ready)
--   [ ] **Product Category card** (image , name {fruit , vegetable , dairy , eggs , meat , chicken , fish , bread , pastry , drinks , wine , alcohol , frozen food , snacks , cereal })
+-   [ ] **Product Category card** (image , name {fruit & vegetable , dairy & eggs , meat & chicken & fish , bread , pastry , drinks ,  frozen food , snacks , cereal })
 -   [] **Footer** (Low priority)
 -   [ ] **Font** (change font from system-ui to desired font)
 
