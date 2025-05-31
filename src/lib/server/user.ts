@@ -1,6 +1,8 @@
 import { db } from "@/db";
+import { InferSelectModel } from "drizzle-orm";
 import { eq } from "drizzle-orm";
 import { userTable } from "@/db/schema";
+export type User = InferSelectModel<typeof userTable>;
 
 export async function createUser(
 	googleId: string,
@@ -15,6 +17,7 @@ export async function createUser(
 			email: email,
 			username: name,
 			picture: picture,
+			role: "user",
 		})
 		.returning({ id: userTable.id });
 
@@ -25,8 +28,9 @@ export async function createUser(
 		id: row.id,
 		googleId,
 		email,
-		name,
+		username: name,
 		picture,
+		role: "user",
 	};
 	return user;
 }
@@ -41,12 +45,13 @@ export async function getUserFromGoogleId(
 			email: userTable.email,
 			name: userTable.username,
 			picture: userTable.picture,
+			role: userTable.role,
 		})
 		.from(userTable)
 		.where(eq(userTable.googleId, googleId));
-	console.log("rows", rows);
+	//console.log("rows", rows);
 	if (rows.length === 0) {
-		console.log("nightmare nightmare nightmare");
+		//console.log("nightmare nightmare nightmare");
 		return null;
 	}
 	const row = rows[0];
@@ -54,16 +59,18 @@ export async function getUserFromGoogleId(
 		id: row.id,
 		googleId: row.googleId,
 		email: row.email,
-		name: row.name,
+		username: row.name,
 		picture: row.picture,
+		role: row.role,
 	};
 	return user;
 }
 
-export interface User {
-	id: number;
-	email: string;
-	googleId: string;
-	name: string;
-	picture: string;
-}
+//export interface User {
+//	id: number;
+//	email: string;
+//	googleId: string;
+//	name: string;
+//	picture: string;
+//	role: string;
+//}

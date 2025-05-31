@@ -10,24 +10,25 @@
 -   [ ] **Home Page** ()
 -   [ ] **Products Page** (Regular products with no time limit or price changes)
 -   [ ] **Daily Deals** (Banner, countdown, discounts, animations)
--   [☑️ ] **Carousel** (library , delay)
--   [☑️ ] **Navbar** (Cart, Account, Logo, Search – no functionality until backend is ready)
--   [ ] **Product Category card** (image , name {fruit & vegetable , dairy & eggs , meat & chicken & fish , bread , pastry , drinks ,  frozen food , snacks , cereal })
--   [] **Footer** (Low priority)
--   [ ] **Font** (change font from system-ui to desired font)
+-   [x️] **Carousel** (library , delay)
+-   [x] **Navbar** (Cart, Account, Logo, Search – no functionality until backend is ready)
+-   [x] ️**Product Category card** (image , name {fruit & vegetable , dairy & eggs , meat & chicken & fish , bread , pastry , drinks ,  frozen food , snacks , cereal })
+-   [x] **Navbar** (Cart, Account, Logo, Search – no functionality until backend is ready)
+-   [x] **Footer** (Low priority)
+-   [x] **Font** (change font from system-ui to desired font)
 
 ### Backend
 
--   [ ] **Database Setup** (PostgreSQL + Drizzle ORM)
-    -   Users Table
-    -   Products Table
--   [ ] **Authentication** (Auth.js with Google OAuth, maybe magic links)
--   [ ] **Connect Navbar Account Button** to database
+-   [x] **Database Setup** (PostgreSQL + Drizzle ORM)
+    -  [x] Users Table
+    -  [x] Products Table
+-   [x] **Authentication** (Auth.js with Google OAuth, maybe magic links)
+-   [x] **Connect Navbar Account Button** to database
 -   [ ] **Implement Search & Filtering** for products
 
 ### Stuff To Fix
 
--   [ ] Countdown goes to negative time after reaching 00:00 if user is focused on the window until refresh.
+-   [x] Countdown goes to negative time after reaching 00:00 if user is focused on the window until refresh.
 
 ### ToDo
 

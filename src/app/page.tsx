@@ -7,7 +7,7 @@ export default async function Home() {
 	const { user } = await getCurrentSession();
 	if (user === null) {
 		console.log("no user authenticated");
-	} else console.log("user authenticated", user.name);
+	} else console.log("user authenticated", user.username, user);
 
 	return (
 		<div className="w-full h-full flex flex-col gap-5">
