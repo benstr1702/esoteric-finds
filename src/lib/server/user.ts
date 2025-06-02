@@ -1,8 +1,8 @@
 import { db } from "@/db";
-import { InferSelectModel } from "drizzle-orm";
+//import { InferSelectModel } from "drizzle-orm";
 import { eq } from "drizzle-orm";
 import { userTable } from "@/db/schema";
-export type User = InferSelectModel<typeof userTable>;
+//export type User = InferSelectModel<typeof userTable>;
 
 export async function createUser(
 	googleId: string,
@@ -26,7 +26,7 @@ export async function createUser(
 	}
 	const user: User = {
 		id: row.id,
-		googleId,
+		googleId: googleId,
 		email,
 		username: name,
 		picture,
@@ -43,7 +43,7 @@ export async function getUserFromGoogleId(
 			id: userTable.id,
 			googleId: userTable.googleId,
 			email: userTable.email,
-			name: userTable.username,
+			username: userTable.username,
 			picture: userTable.picture,
 			role: userTable.role,
 		})
@@ -59,18 +59,18 @@ export async function getUserFromGoogleId(
 		id: row.id,
 		googleId: row.googleId,
 		email: row.email,
-		username: row.name,
+		username: row.username,
 		picture: row.picture,
 		role: row.role,
 	};
 	return user;
 }
 
-//export interface User {
-//	id: number;
-//	email: string;
-//	googleId: string;
-//	name: string;
-//	picture: string;
-//	role: string;
-//}
+export interface User {
+	id: number;
+	email: string;
+	googleId: string;
+	username: string;
+	picture: string;
+	role: string;
+}

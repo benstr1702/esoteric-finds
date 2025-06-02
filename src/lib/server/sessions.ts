@@ -25,6 +25,7 @@ export async function validateSessionToken(
 			userEmail: userTable.email,
 			userName: userTable.username,
 			userPicture: userTable.picture,
+			userRole: userTable.role,
 		})
 		.from(sessionTable)
 		.innerJoin(userTable, eq(sessionTable.userId, userTable.id))
@@ -43,8 +44,9 @@ export async function validateSessionToken(
 		id: row.userId,
 		googleId: row.userGoogleId,
 		email: row.userEmail,
-		name: row.userName,
+		username: row.userName,
 		picture: row.userPicture,
+		role: row.userRole,
 	};
 	if (Date.now() >= session.expiresAt.getTime()) {
 		db.delete(sessionTable).where(eq(sessionTable.id, sessionId));

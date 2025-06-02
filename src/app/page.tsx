@@ -5,6 +5,8 @@ import ProductsContainer from "@/components/products/ProductsContainer";
 export default async function Home() {
 	if (!globalGETRateLimit()) return "Too many requests";
 	const { user } = await getCurrentSession();
+	console.log(user);
+
 	if (user === null) {
 		console.log("no user authenticated");
 	} else console.log("user authenticated", user.username, user);

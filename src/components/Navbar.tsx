@@ -95,11 +95,11 @@ export default function Navbar() {
 							<Input
 								type="text"
 								placeholder="Search..."
-								className="w-full border border-black rounded-l-full px-4 py-2 "
+								className="w-full border border-black rounded-l-full px-4 py-2 hover:bg-gray-50"
 							/>
 						</div>
 						<button className="text-black w-12 h-9 bg-white border border-black border-l-0 rounded-r-full flex items-center justify-center hover:opacity-80 max-[450px]:w-9 max-[450px]:h-9 max-[450px]:rounded-full max-[450px]:border-none">
-							<Search className="w-5 h-5" />
+							<Search className="w-5 h-5 " />
 						</button>
 					</div>
 				</div>
@@ -155,7 +155,7 @@ export default function Navbar() {
 						) : user ? (
 							<div className="text-xs flex flex-col items-start leading-tight">
 								<span>Hello,</span>
-								<span>{user.name}</span>
+								<span>{user.username}</span>
 							</div>
 						) : (
 							<span className="text-sm"> Sign In</span>
