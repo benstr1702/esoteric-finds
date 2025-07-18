@@ -15,54 +15,77 @@ export async function validateSessionToken(
 	const sessionId = encodeHexLowerCase(
 		sha256(new TextEncoder().encode(token))
 	);
-	const row = await db
-		.select({
-			sessionId: sessionTable.id,
-			sessionUserId: sessionTable.userId,
-			sessionExpiresAt: sessionTable.expiresAt,
-			userId: userTable.id,
-			userGoogleId: userTable.googleId,
-			userEmail: userTable.email,
-			userName: userTable.username,
-			userPicture: userTable.picture,
-			userRole: userTable.role,
-		})
-		.from(sessionTable)
-		.innerJoin(userTable, eq(sessionTable.userId, userTable.id))
-		.where(eq(sessionTable.id, sessionId))
-		.then((rows) => rows[0]);
-
-	if (row === null) {
-		return { session: null, user: null };
-	}
-	const session: Session = {
-		id: row.sessionId,
-		userId: row.userId,
-		expiresAt: new Date(row.sessionExpiresAt),
-	};
-	const user: User = {
-		id: row.userId,
-		googleId: row.userGoogleId,
-		email: row.userEmail,
-		username: row.userName,
-		picture: row.userPicture,
-		role: row.userRole,
-	};
-	if (Date.now() >= session.expiresAt.getTime()) {
-		db.delete(sessionTable).where(eq(sessionTable.id, sessionId));
-		return { session: null, user: null };
-	}
-	if (Date.now() >= session.expiresAt.getTime() - 1000 * 60 * 60 * 24 * 15) {
-		session.expiresAt = new Date(Date.now() + 1000 * 60 * 60 * 24 * 30);
-		db.update(sessionTable)
-			.set({
-				expiresAt: new Date(
-					Math.floor(session.expiresAt.getTime() / 1000) * 1000
-				),
+	try {
+		const row = await db
+			.select({
+				sessionId: sessionTable.id,
+				sessionUserId: sessionTable.userId,
+				sessionExpiresAt: sessionTable.expiresAt,
+				userId: userTable.id,
+				userGoogleId: userTable.googleId,
+				userEmail: userTable.email,
+				userName: userTable.username,
+				userPicture: userTable.picture,
+				userRole: userTable.role,
 			})
-			.where(eq(sessionTable.id, sessionId));
+			.from(sessionTable)
+			.innerJoin(userTable, eq(sessionTable.userId, userTable.id))
+			.where(eq(sessionTable.id, sessionId))
+			.then((rows) => rows[0]);
+
+		if (row === null) {
+			return { session: null, user: null };
+		}
+		const session: Session = {
+			id: row.sessionId,
+			userId: row.userId,
+			expiresAt: new Date(row.sessionExpiresAt),
+		};
+		const user: User = {
+			id: row.userId,
+			googleId: row.userGoogleId,
+			email: row.userEmail,
+			username: row.userName,
+			picture: row.userPicture,
+			role: row.userRole,
+		};
+		if (Date.now() >= session.expiresAt.getTime()) {
+			db.delete(sessionTable)
+				.where(eq(sessionTable.id, sessionId))
+				.catch((error) =>
+					console.error("Failed to delete expired session", error)
+				);
+			return { session: null, user: null };
+		}
+		if (
+			Date.now() >=
+			session.expiresAt.getTime() - 1000 * 60 * 60 * 24 * 15
+		) {
+			session.expiresAt = new Date(Date.now() + 1000 * 60 * 60 * 24 * 30);
+			db.update(sessionTable)
+				.set({
+					expiresAt: new Date(
+						Math.floor(session.expiresAt.getTime() / 1000) * 1000
+					),
+				})
+				.where(eq(sessionTable.id, sessionId))
+				.catch((error) =>
+					console.error(
+						"failed to update session expiration date",
+						error
+					)
+				);
+		}
+		return { session, user };
+	} catch (error) {
+		console.error(
+			"something done fucked up (prob db not turned on)",
+			error
+		);
+		throw new Error(
+			"error with getting the session and user, probably db not turned on or something "
+		);
 	}
-	return { session, user };
 }
 
 export const getCurrentSession = cache(

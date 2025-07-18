@@ -43,6 +43,13 @@
       "when": 1748525060112,
       "tag": "0005_clever_calypso",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1748897395721,
+      "tag": "0006_lush_carlie_cooper",
+      "breakpoints": true
     }
   ]
 }

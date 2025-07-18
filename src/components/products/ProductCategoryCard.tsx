@@ -22,7 +22,7 @@ export default function ProductCategoryCard({
 			onClick={() => router.push(`/category/${productSlug}`)}
 			className="flex flex-col justify-center items-center hover:cursor-pointer m-4"
 		>
-			<div className="w-36 h-36 rounded-full text-center flex flex-col justify-between bg-blue-200/30 hover:bg-blue-200/55">
+			<div className="w-36 h-36 rounded-full text-center flex flex-col justify-between bg-blue-200/30 hover:bg-blue-200/55 duration-200 transition-transform hover:scale-110">
 				<div className="flex-grow flex items-center justify-center ">
 					<Image
 						src={productCategoryImage}

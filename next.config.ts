@@ -11,6 +11,18 @@ const nextConfig: NextConfig = {
 				protocol: "https",
 				hostname: "ik.imagekit.io",
 			},
+			{
+				protocol: "https",
+				hostname: "upload.wikimedia.org",
+			},
+			{
+				protocol: "https",
+				hostname: "books.google.co.il",
+			},
+			{
+				protocol: "https",
+				hostname: "encrypted-tbn2.gstatic.com",
+			},
 		],
 	},
 };

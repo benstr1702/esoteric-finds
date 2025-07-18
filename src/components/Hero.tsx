@@ -1,14 +1,15 @@
-"use client";
+//"use client";
 import CarouselComponent from "./carousel/Carousel";
 import Countdown from "./Countdown";
-export default function Hero() {
-  return (
-    <div
-      className="w-full  flex flex-row-reverse 
-		 h-96 bg-blue-600 "
-    >
-      <CarouselComponent />
-      <Countdown />
-    </div>
-  );
+import { CarouselProps } from "./carousel/CarouselSlide";
+export default function Hero({ grouped }: CarouselProps) {
+	return (
+		<div
+			className="w-full  flex flex-row-reverse border-black/10 border-b-2 
+		 h-96 bg-white"
+		>
+			<CarouselComponent grouped={grouped} />
+			<Countdown />
+		</div>
+	);
 }

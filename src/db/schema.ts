@@ -22,7 +22,7 @@ export const userTable = pgTable(
 		email: text("email").notNull().unique(),
 		username: text("username").notNull(),
 		picture: text("picture").notNull(),
-		role: enumRoles().default("guest").notNull(),
+		role: enumRoles().default("user").notNull(),
 	},
 	(table) => [index("google_id_index").on(table.googleId)]
 );
@@ -51,7 +51,7 @@ export const productCategoryTable = pgTable(
 	(table) => [index("slug_index").on(table.slug)]
 );
 
-export const productsTable = pgTable("products_table", {
+export const productTable = pgTable("products_table", {
 	id: bigserial("id", { mode: "number" }).primaryKey(),
 	name: varchar("name", { length: 255 }).notNull(),
 	image: text("image").default("/file.svg"),
@@ -81,3 +81,8 @@ export const productsTable = pgTable("products_table", {
 // Type Definitions
 export type User = InferSelectModel<typeof userTable>;
 export type Session = InferSelectModel<typeof sessionTable>;
+export type Product = InferSelectModel<typeof productTable>;
+export type ProductWithCategory = Product & {
+	categorySlug: string | null;
+	categoryName: string | null;
+};
