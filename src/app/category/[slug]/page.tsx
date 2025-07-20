@@ -98,18 +98,14 @@ export default async function Page({ params }: Props) {
 					products.map((product) => (
 						<div key={product.id} className="flex justify-center">
 							<ProductCard
-								productImage={product.image ?? "question.jpg"}
-								productManufacturer={product.manufacturer}
-								productName={product.name}
-								productPrice={
-									product.isOnSale && product.discountedPrice
-										? product.discountedPrice / 100
-										: product.price / 100
-								}
-								productVolumeOrQuantity={
-									product.volumeOrQuantity ?? null
-								}
-								perKilo={null}
+								product={{
+									...product,
+									price:
+										product.isOnSale &&
+										product.discountedPrice
+											? product.discountedPrice / 100
+											: product.price / 100,
+								}}
 								imageWidth={imageDimensions.width}
 								imageHeight={imageDimensions.height}
 							/>

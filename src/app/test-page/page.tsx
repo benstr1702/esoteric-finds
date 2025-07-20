@@ -2,6 +2,7 @@ import ProductModal from "@/components/products/ProductModal";
 import { db } from "@/db";
 import { productTable } from "@/db/schema";
 import { eq } from "drizzle-orm";
+import TestButton from "./TestButton";
 
 export default async function Page() {
 	const product = await db
@@ -14,6 +15,7 @@ export default async function Page() {
 			<div className="flex justify-center items-center w-full h-screen">
 				<ProductModal product={product[0]} />
 			</div>
+			<TestButton />
 		</div>
 	);
 }

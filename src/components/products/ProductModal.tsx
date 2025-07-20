@@ -1,157 +1,10 @@
-////"use client";
-//import { useRef, useCallback } from "react";
-//import { X } from "lucide-react";
-//import type { Product } from "@/db/schema";
-//import Image from "next/image";
-//import { Geist } from "next/font/google";
-////import { motion } from "motion/react";
-
-//const geistSans = Geist({
-//	variable: "--font-geist-sans",
-//	subsets: ["latin"],
-//});
-//type Props = {
-//	product: Product;
-//};
-
-//export default function ProductModal({ product }: Props) {
-//	const dialogRef = useRef<HTMLDialogElement | null>(null);
-//	const buttonRef = useRef<HTMLButtonElement | null>(null);
-
-//	const openDialog = useCallback(() => {
-//		dialogRef.current?.showModal();
-//	}, []);
-
-//	const closeDialog = useCallback(() => {
-//		dialogRef.current?.close();
-//	}, []);
-
-//	const handleBackdropClick = (
-//		event: React.MouseEvent<HTMLDialogElement>
-//	) => {
-//		if (event.target === dialogRef.current) {
-//			closeDialog();
-//		}
-//	};
-
-//	const formatPrice = (amount: number) =>
-//		new Intl.NumberFormat("en-US", {
-//			style: "currency",
-//			currency: "USD",
-//		}).format(amount / 100);
-
-//	return (
-//		<div
-//			className={`${geistSans.variable} w-2xl h-96 border border-green-300`}
-//		>
-//			<dialog
-//				ref={dialogRef}
-//				onClick={handleBackdropClick}
-//				className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
-//					backdrop:bg-black/50 p-0 rounded-xl shadow-xl w-[45rem] h-[45rem]"
-//			>
-//				<div className="relative w-full h-full p-6 flex flex-col">
-//					{/* Close button */}
-//					<button
-//						onClick={closeDialog}
-//						className="absolute top-4 right-4 text-gray-600 hover:text-black"
-//					>
-//						<X
-//							className="hover:cursor-pointer hover:bg-red-500 transition-all duration-300 ease-in-out p-1 rounded-full bg-red-400 text-white"
-//							size={30}
-//						/>
-//					</button>
-
-//					{/* Product Name */}
-//					<h2 className="text-3xl font-semibold mb-4 font-serif">
-//						{product.name}
-//					</h2>
-
-//					{/* Main content */}
-//					<div className="flex w-[90%] h-[90%] mx-auto mt-2 rounded-lg overflow-hidden border">
-//						<div className="w-1/2 bg-gray-100 flex items-center justify-center p-4">
-//							<Image
-//								src={product.image || "/preview.webp"}
-//								alt={`${product.name} Image`}
-//								width={300}
-//								height={300}
-//								className="object-contain max-h-full max-w-full rounded"
-//							/>
-//						</div>
-
-//						<div className="w-1/2 bg-white flex flex-col justify-between p-6 text-sm">
-//							<div className="space-y-2">
-//								<p className="text-gray-700">
-//									{product.description}
-//								</p>
-//								<p className="text-gray-600">
-//									<span className="font-medium">
-//										Producer:
-//									</span>{" "}
-//									{product.manufacturer}
-//								</p>
-//								<p className="text-gray-600">
-//									<span className="font-medium">
-//										Product ID:
-//									</span>{" "}
-//									{product.id}
-//								</p>
-//								<p className="text-gray-600">
-//									<span className="font-medium">
-//										Weight/Quantity:
-//									</span>{" "}
-//									{product.volumeOrQuantity}
-//								</p>
-
-//								{/* Price Section */}
-//								<div className="mt-4">
-//									{product.isOnSale &&
-//									product.discountedPrice !== null ? (
-//										<div className="flex flex-col text-base">
-//											<span className="line-through text-red-500">
-//												{formatPrice(product.price)}
-//											</span>
-//											<span className="text-green-600 font-bold text-lg">
-//												{formatPrice(
-//													product.discountedPrice
-//												)}
-//											</span>
-//										</div>
-//									) : (
-//										<p className="text-gray-900 text-lg font-semibold">
-//											{formatPrice(product.price)}
-//										</p>
-//									)}
-//								</div>
-//							</div>
-
-//							{/* Add to Cart Button */}
-//							<button className="mt-6 w-full bg-black text-white py-2 rounded hover:bg-gray-800 transition">
-//								Add to Cart
-//							</button>
-//						</div>
-//					</div>
-//				</div>
-//			</dialog>
-
-//			{/* Trigger Button */}
-//			<button
-//				ref={buttonRef}
-//				onClick={openDialog}
-//				className="mt-10 px-4 py-2 bg-black text-white rounded hover:bg-gray-800"
-//			>
-//				Show Dialog
-//			</button>
-//		</div>
-//	);
-//}
-
 "use client";
 import { useRef, useCallback, useState, useEffect } from "react";
 import { X } from "lucide-react";
 import type { Product } from "@/db/schema";
 import Image from "next/image";
 import { Geist } from "next/font/google";
+import AddToCartButton from "../ui/AddToCartButton";
 import * as motion from "motion/react-client";
 
 const geistSans = Geist({
@@ -307,9 +160,7 @@ export default function ProductModal({ product }: Props) {
 							</div>
 
 							{/* Add to Cart Button */}
-							<button className="mt-6 w-full bg-black text-white py-2 rounded hover:bg-gray-800 transition">
-								Add to Cart
-							</button>
+							<AddToCartButton product={product} />
 						</div>
 					</div>
 				</motion.div>
