@@ -20,6 +20,8 @@ export function cartReducer(state: CartState, action: CartAction) {
 			};
 		case "CLEAR_CART":
 			return { items: [] };
+		case "SET_CART":
+			return action.payload;
 		default:
 			return state;
 	}

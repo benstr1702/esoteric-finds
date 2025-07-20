@@ -1,31 +1,30 @@
 "use client";
 
 import { createContext, useReducer, useEffect, type ReactNode } from "react";
-import { CartContextType, CartState } from "./cartTypes";
-import { cartReducer } from "./cartReducer";
+import { CartContextType } from "./cartTypes";
+import { cartReducer, initialCartState } from "./cartReducer";
 
 export const CartContext = createContext<CartContextType | undefined>(
 	undefined
 );
 
-function getInitialCartState(): CartState {
-	if (typeof window !== "undefined") {
-		try {
-			const stored = localStorage.getItem("cart");
-			if (stored) return JSON.parse(stored);
-		} catch (e) {
-			console.error("Failed to parse cart from localStorage", e);
-		}
-	}
-	return { items: [] };
-}
-
 export function CartProvider({ children }: { children: ReactNode }) {
-	const [state, dispatch] = useReducer(
-		cartReducer,
-		undefined,
-		getInitialCartState
-	);
+	const [state, dispatch] = useReducer(cartReducer, initialCartState);
+
+	useEffect(() => {
+		if (typeof window !== "undefined") {
+			try {
+				const stored = localStorage.getItem("cart");
+				if (stored)
+					dispatch({
+						type: "SET_CART",
+						payload: JSON.parse(stored),
+					});
+			} catch (e) {
+				console.error("Failed to parse cart from localStorage", e);
+			}
+		}
+	}, []);
 
 	useEffect(() => {
 		localStorage.setItem("cart", JSON.stringify(state));

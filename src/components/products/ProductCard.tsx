@@ -1,5 +1,5 @@
 import Image from "next/image";
-import AddToCartButton from "../ui/AddToCartButton";
+import ClientAddToCartButton from "../ui/ClientAddToCart";
 import type { Product } from "@/db/schema";
 
 type ProductCardProps = {
@@ -21,7 +21,7 @@ export default function ProductCard({
 	return (
 		<div className="hover:cursor-pointer w-60 h-96 rounded-2xl overflow-hidden border border-gray-300 shadow flex flex-col transition-colors hover:border-gray-600 ease-in-out hover:bg-gray-300/10 duration-400">
 			{/* Image section with fixed size */}
-			<div className="flex justify-center items-center pt-3 h-48">
+			<div className="flex justify-center items-center pt-3 ">
 				<Image
 					src={product.image || "/preview.webp"}
 					alt={product.name}
@@ -50,7 +50,7 @@ export default function ProductCard({
 				</div>
 
 				{/**button */}
-				<AddToCartButton product={product} />
+				<ClientAddToCartButton product={product} />
 			</div>
 		</div>
 	);

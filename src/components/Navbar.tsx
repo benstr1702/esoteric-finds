@@ -9,6 +9,7 @@ import { useSession } from "@/lib/hooks/useSession";
 import { useCallback, useEffect, useRef } from "react";
 import { logoutAction } from "@/app/actions";
 import { useState } from "react";
+import CartNotificationBadge from "./cart/CartNotificationBadge";
 const montserrat = Montserrat({
 	subsets: ["latin"],
 	weight: ["400", "500", "600", "700"],
@@ -184,6 +185,7 @@ export default function Navbar() {
 					</button>
 
 					{/* Cart Button */}
+					<CartNotificationBadge />
 					<button
 						className="rounded-full w-10 h-10 flex items-center justify-center transition-colors hover:bg-white/10"
 						onClick={() => router.push("/cart")}
