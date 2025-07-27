@@ -5,50 +5,8 @@
     {
       "idx": 0,
       "version": "7",
-      "when": 1744479050337,
-      "tag": "0000_talented_jackal",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "7",
-      "when": 1744731706191,
-      "tag": "0001_eager_steel_serpent",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "7",
-      "when": 1747410542392,
-      "tag": "0002_sour_blazing_skull",
-      "breakpoints": true
-    },
-    {
-      "idx": 3,
-      "version": "7",
-      "when": 1748208450786,
-      "tag": "0003_thick_madripoor",
-      "breakpoints": true
-    },
-    {
-      "idx": 4,
-      "version": "7",
-      "when": 1748524450179,
-      "tag": "0004_whole_tarot",
-      "breakpoints": true
-    },
-    {
-      "idx": 5,
-      "version": "7",
-      "when": 1748525060112,
-      "tag": "0005_clever_calypso",
-      "breakpoints": true
-    },
-    {
-      "idx": 6,
-      "version": "7",
-      "when": 1748897395721,
-      "tag": "0006_lush_carlie_cooper",
+      "when": 1753618267767,
+      "tag": "0000_omniscient_overlord",
       "breakpoints": true
     }
   ]

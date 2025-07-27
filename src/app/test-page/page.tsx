@@ -1,21 +1,24 @@
-import ProductModal from "@/components/products/ProductModal";
-import { db } from "@/db";
-import { productTable } from "@/db/schema";
-import { eq } from "drizzle-orm";
-import TestButton from "./TestButton";
+"use client";
 
-export default async function Page() {
-	const product = await db
-		.select()
-		.from(productTable)
-		.where(eq(productTable.id, 4));
+import { useRef } from "react";
+import ProductModal, {
+	ProductModalRef,
+} from "@/components/products/ProductModal";
+import type { Product } from "@/db/schema";
+
+export default function ClientProductPage({ product }: { product: Product }) {
+	const modalRef = useRef<ProductModalRef>(null);
 
 	return (
 		<div>
-			<div className="flex justify-center items-center w-full h-screen">
-				<ProductModal product={product[0]} />
-			</div>
-			<TestButton />
+			<ProductModal ref={modalRef} product={product} />
+
+			<button
+				onClick={() => modalRef.current?.openDialog()}
+				className="mt-6 block mx-auto bg-blue-600 text-white px-4 py-2 rounded"
+			>
+				Open Modal
+			</button>
 		</div>
 	);
 }

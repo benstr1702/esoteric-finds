@@ -40,16 +40,7 @@ export default async function SearchPage({ searchParams }: Props) {
 				<ul className="flex  gap-4 ">
 					{products.map((product) => (
 						<li key={product.id}>
-							<ProductCard
-								productManufacturer={product.manufacturer}
-								productImage={product.image ?? "/preview.webp"}
-								productName={product.name}
-								productPrice={product.price}
-								productVolumeOrQuantity={
-									product.volumeOrQuantity
-								}
-								perKilo={null}
-							/>
+							<ProductCard product={product} />
 						</li>
 					))}
 				</ul>

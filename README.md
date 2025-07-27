@@ -16,8 +16,8 @@
 -   [x] **Navbar** (Cart, Account, Logo, Search – no functionality until backend is ready)
 -   [x] **Footer** (Low priority)
 -   [x] **Font** (change font from system-ui to desired font)
--   [ ] **Product Modal**
--   [ ] **Cart Page**
+-   [] **Product Page**
+-   [x] **Cart Page**
 -   [ ] **Profile Page for settings**
 ### Backend
 
@@ -39,4 +39,3 @@
 -   when width reaches 450 make search icon expand search bar
 -   update daily deals when the timer reaches 0
 -   add more products
-- change the scale animation from motion to the parent 

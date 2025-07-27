@@ -1,5 +1,13 @@
 "use client";
-import { useRef, useCallback, useState, useEffect } from "react";
+
+import {
+	forwardRef,
+	useRef,
+	useCallback,
+	useState,
+	useEffect,
+	useImperativeHandle,
+} from "react";
 import { X } from "lucide-react";
 import type { Product } from "@/db/schema";
 import Image from "next/image";
@@ -12,11 +20,15 @@ const geistSans = Geist({
 	subsets: ["latin"],
 });
 
+export type ProductModalRef = {
+	openDialog: () => void;
+};
+
 type Props = {
 	product: Product;
 };
 
-export default function ProductModal({ product }: Props) {
+const ProductModal = forwardRef<ProductModalRef, Props>(({ product }, ref) => {
 	const dialogRef = useRef<HTMLDialogElement | null>(null);
 	const buttonRef = useRef<HTMLButtonElement | null>(null);
 	const [isOpen, setIsOpen] = useState(false);
@@ -28,21 +40,17 @@ export default function ProductModal({ product }: Props) {
 
 	const closeDialog = useCallback(() => {
 		setIsOpen(false);
-		// Wait for animation to complete before closing
-		//setTimeout(() => {
 		dialogRef.current?.close();
-		//}, 400);
 	}, []);
 
 	const handleBackdropClick = (
 		event: React.MouseEvent<HTMLDialogElement>
 	) => {
-		if (event.target === dialogRef.current) {
-			closeDialog();
-		}
+		if (event.target === dialogRef.current) closeDialog();
 	};
 
-	// Handle escape key
+	useImperativeHandle(ref, () => ({ openDialog }), [openDialog]);
+
 	useEffect(() => {
 		const handleEscape = (e: KeyboardEvent) => {
 			if (e.key === "Escape" && dialogRef.current?.open) {
@@ -85,7 +93,6 @@ export default function ProductModal({ product }: Props) {
 					}}
 					className="relative w-full h-full p-6 flex flex-col bg-white rounded-xl"
 				>
-					{/* Close button */}
 					<button
 						onClick={closeDialog}
 						className="absolute top-4 right-4 text-gray-600 hover:text-black z-10"
@@ -96,12 +103,10 @@ export default function ProductModal({ product }: Props) {
 						/>
 					</button>
 
-					{/* Product Name */}
 					<h2 className="text-3xl font-semibold mb-4 font-serif">
 						{product.name}
 					</h2>
 
-					{/* Main content */}
 					<div className="flex w-[90%] h-[90%] mx-auto mt-2 rounded-lg overflow-hidden border">
 						<div className="w-1/2 bg-gray-100 flex items-center justify-center p-4">
 							<Image
@@ -137,7 +142,6 @@ export default function ProductModal({ product }: Props) {
 									{product.volumeOrQuantity}
 								</p>
 
-								{/* Price Section */}
 								<div className="mt-4">
 									{product.isOnSale &&
 									product.discountedPrice !== null ? (
@@ -159,14 +163,13 @@ export default function ProductModal({ product }: Props) {
 								</div>
 							</div>
 
-							{/* Add to Cart Button */}
 							<AddToCartButton product={product} />
 						</div>
 					</div>
 				</motion.div>
 			</dialog>
 
-			{/* Trigger Button */}
+			{/* Optional trigger */}
 			<button
 				ref={buttonRef}
 				onClick={openDialog}
@@ -176,4 +179,8 @@ export default function ProductModal({ product }: Props) {
 			</button>
 		</div>
 	);
-}
+});
+
+ProductModal.displayName = "ProductModal"; // Required for forwardRef
+
+export default ProductModal;

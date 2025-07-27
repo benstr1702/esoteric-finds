@@ -26,7 +26,6 @@ export default function CarouselSlide({ product }: SlideProps) {
 					alt={product.name}
 					width={160}
 					height={300}
-					className="rounded"
 				/>
 			)}
 

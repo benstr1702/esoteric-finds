@@ -83,12 +83,13 @@ export default function AdminPanel() {
 			const productData = {
 				name: formData.name,
 				description: formData.description,
-				price: parseInt(formData.price) * 100, // Convert to cents
+				price: Math.round(parseFloat(formData.price) * 100),
+
 				volumeOrQuantity: formData.volumeOrQuantity,
 				stockCount: parseInt(formData.stockCount),
 				isOnSale: formData.isOnSale,
 				discountedPrice: formData.discountedPrice
-					? parseInt(formData.discountedPrice) * 100
+					? Math.round(parseFloat(formData.discountedPrice) * 100)
 					: null,
 				categoryId: parseInt(formData.categoryId),
 				manufacturer: formData.manufacturer,

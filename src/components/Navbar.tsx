@@ -185,12 +185,12 @@ export default function Navbar() {
 					</button>
 
 					{/* Cart Button */}
-					<CartNotificationBadge />
 					<button
-						className="rounded-full w-10 h-10 flex items-center justify-center transition-colors hover:bg-white/10"
+						className="rounded-full w-10 h-10 flex items-center justify-center relative transition-colors hover:bg-white/10"
 						onClick={() => router.push("/cart")}
 					>
 						<ShoppingCart className="w-5 h-5" />
+						<CartNotificationBadge />
 					</button>
 				</div>
 			</nav>

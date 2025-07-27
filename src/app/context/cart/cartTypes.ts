@@ -2,7 +2,11 @@ import type { Product } from "@/db/schema";
 import React from "react";
 
 export type CartState = {
-	items: Product[];
+	items: CartItem[];
+};
+
+export type CartItem = Product & {
+	quantity: number;
 };
 
 export type CartAction =

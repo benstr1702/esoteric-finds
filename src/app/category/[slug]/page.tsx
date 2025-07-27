@@ -10,6 +10,8 @@ import { Sansita } from "next/font/google";
 const sansita = Sansita({
 	weight: ["400", "700"],
 	variable: "--font-sansita",
+	preload: true,
+	subsets: ["latin"],
 });
 
 type Props = {
