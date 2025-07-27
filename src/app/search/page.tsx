@@ -6,8 +6,8 @@ import ProductCard from "@/components/products/ProductCard";
 const sansita = Sansita({
 	weight: ["400", "700"],
 	variable: "--font-sansita",
-	preload: true,
 	subsets: ["latin"],
+	preload: true,
 });
 
 type Props = {
