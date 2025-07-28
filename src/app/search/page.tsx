@@ -11,13 +11,14 @@ const sansita = Sansita({
 });
 
 type Props = {
-	searchParams: {
+	searchParams: Promise<{
 		q?: string;
-	};
+	}>;
 };
 
 export default async function SearchPage({ searchParams }: Props) {
-	const query = searchParams.q?.trim();
+	const params = await searchParams;
+	const query = params.q?.trim();
 	if (!query) {
 		return <p className="p-6">No search query provided.</p>;
 	}

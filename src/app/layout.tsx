@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Sansita } from "next/font/google";
 import "./globals.css";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
@@ -16,6 +16,12 @@ const geistMono = Geist_Mono({
 	subsets: ["latin"],
 });
 
+const sansita = Sansita({
+	weight: ["400", "700"],
+	variable: "--font-sansita",
+	preload: true,
+	subsets: ["latin"],
+});
 export const metadata: Metadata = {
 	title: "Esoteric Finds",
 	description: "Don't miss the deals!",

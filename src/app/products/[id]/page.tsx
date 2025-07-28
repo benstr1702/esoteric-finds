@@ -1,8 +1,8 @@
 import { getProductById } from "@/lib/server/add-product";
 type ProductPageProps = {
-	params: {
+	params: Promise<{
 		id: string;
-	};
+	}>;
 };
 export default async function Page({ params }: ProductPageProps) {
 	const { id } = await params;

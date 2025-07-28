@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { addProduct } from "@/lib/server/add-product";
 
 export default function AdminPanel() {
@@ -27,12 +27,7 @@ export default function AdminPanel() {
 		id: number;
 		name: string;
 	};
-	// Fetch categories on component mount
-	useEffect(() => {
-		fetchCategories();
-	}, []);
-
-	const fetchCategories = async () => {
+	const fetchCategories = useCallback(async () => {
 		try {
 			const response = await fetch("/api/categories");
 			if (response.ok) {
@@ -42,7 +37,11 @@ export default function AdminPanel() {
 		} catch (error) {
 			console.error("Failed to fetch categories:", error);
 		}
-	};
+	}, []);
+	// Fetch categories on component mount
+	useEffect(() => {
+		fetchCategories();
+	}, [fetchCategories]);
 
 	const handleInputChange = (
 		e: React.ChangeEvent<
