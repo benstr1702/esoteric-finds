@@ -111,7 +111,11 @@ export default async function Page({ params }: Props) {
 								imageWidth={imageDimensions.width}
 								imageHeight={imageDimensions.height}
 							/>*/}
-							<ProductCard product={product} />
+							<ProductCard
+								product={product}
+								imageHeight={imageDimensions.width}
+								imageWidth={imageDimensions.width}
+							/>
 						</div>
 					))
 				)}
