@@ -8,6 +8,7 @@ export default async function Page() {
 	//console.log("user:", user);
 	if (user === null) {
 		console.log("no user authenticated");
+		// redirect to login page
 	} else console.log("user authenticated", user.username, user);
 
 	return <div className="h-screen w-full">hellow world</div>;

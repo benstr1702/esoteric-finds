@@ -99,7 +99,7 @@ export default async function Page({ params }: Props) {
 				) : (
 					products.map((product) => (
 						<div key={product.id} className="flex justify-center">
-							<ProductCard
+							{/*<ProductCard
 								product={{
 									...product,
 									price:
@@ -110,7 +110,8 @@ export default async function Page({ params }: Props) {
 								}}
 								imageWidth={imageDimensions.width}
 								imageHeight={imageDimensions.height}
-							/>
+							/>*/}
+							<ProductCard product={product} />
 						</div>
 					))
 				)}
